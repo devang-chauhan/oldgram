@@ -5,6 +5,9 @@ const nameElArr = Array.from(document.getElementsByClassName("name"));
 const locationEl = document.getElementById("location");
 const postEl = document.getElementById("post");
 const likesEl = document.getElementById("likes");
+const likeBtn = document.getElementById("like");
+const commentBtn = document.getElementById("comment");
+const dmBtn = document.getElementById("dm");
 let count = 0;
 const user = posts[count];
 
@@ -15,9 +18,12 @@ function update(user) {
     locationEl.innerHTML = user.location;
     postEl.src = user.post;
     likesEl.textContent = `${user.likes} likes`;
+    if (user.isLiked) {
+        likeBtn.src = "images/icon-heart-red.png";
+    } else {
+        likeBtn.src = "images/icon-heart.png";
+    }
 }
-
-
 
 
 function handleTouch(start,end){
@@ -51,6 +57,11 @@ var rightSwipe = () => {
 
 window.onload = function () {
 
+    if (window.innerWidth > 450) {
+        alert("To be viewed on a mobile screen.");
+    }
+    
+
     let startX = 0;
     let endX = 0;
 
@@ -66,3 +77,19 @@ window.onload = function () {
 };
 
 update(user);
+
+likeBtn.addEventListener("click", () => {
+    const user = posts[count];
+    if (user.isLiked == false) {
+        user.isLiked = true;
+        user.likes++;
+        update(user);
+    }
+});
+
+function showAlert() {
+    alert("Functionality not added yet.");
+}
+
+commentBtn.addEventListener("click", showAlert);
+dmBtn.addEventListener("click", showAlert);
