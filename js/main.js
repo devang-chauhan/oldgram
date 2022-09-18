@@ -10,37 +10,27 @@ const user = posts[count];
 
 
 function update(user) {
-    // update profile pics
     userPicElArr.forEach(obj => { obj.src = user.avatar; });
-
-    // update name
     nameElArr.forEach(obj => { obj.textContent = user.name; });
-
-    // update location
     locationEl.innerHTML = user.location;
-
-    // update post image
     postEl.src = user.post;
-
-    // number of likes
     likesEl.textContent = `${user.likes} likes`;
 }
 
-update(user);
 
 
-function handleTouch(start,end, left, right){
+
+function handleTouch(start,end){
   const xDist = end - start;
-  console.log(`Horizontal distance is ${xDist}`);
    if(xDist > 100){
-      right();
+      rightSwipe();
     }else if(xDist<(100*-1)){
-      left();
+      leftSwipe();
     }
 }
 
 
-var left = () => {
+var leftSwipe = () => {
     count++;
     if (count > posts.length - 1) {
         count = 2;
@@ -49,7 +39,7 @@ var left = () => {
     update(user);
     
 };
-var right = () => {
+var rightSwipe = () => {
     count--;
     if (count < 0) {
         count = 0;
@@ -60,15 +50,19 @@ var right = () => {
 
 
 window.onload = function () {
+
     let startX = 0;
     let endX = 0;
+
     window.addEventListener('touchstart', function (event) {
         startX = event.touches[0].clientX;
     });
   
     window.addEventListener('touchend', function (event) {
         endX = event.changedTouches[0].clientX;
-        handleTouch(startX, endX, left, right);
+        handleTouch(startX, endX);
    
     });
 };
+
+update(user);
