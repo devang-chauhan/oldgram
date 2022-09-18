@@ -1,5 +1,5 @@
 ### Oldgram ~ Instagram clone.
 
-A basic web app interface created with vanilla JS and CSS.
+A clone of instagram post created using vanilla JS and CSS.
 
 ![App](/images/oldgram.png)
